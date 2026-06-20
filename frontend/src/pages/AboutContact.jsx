@@ -238,11 +238,32 @@ export function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    setTimeout(() => {
-      toast.success("Message sent! We'll reply within 2 hours.");
-      setForm({ name: "", email: "", phone: "", message: "" });
+
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("✅ Message sent! We'll reply within 2 hours.");
+        setForm({ name: "", email: "", phone: "", message: "" });
+      } else {
+        toast.error(
+          data.message || "Failed to send message. Please try again.",
+        );
+      }
+    } catch (error) {
+      toast.error("Network error. Please check your connection.");
+      console.error("Contact form error:", error);
+    } finally {
       setSending(false);
-    }, 1000);
+    }
   };
 
   return (

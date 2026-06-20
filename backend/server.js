@@ -21,10 +21,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const contactRoutes = require("./routes/contactRoute");
+
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/contact", contactRoutes);
 
 // Health check
 app.get("/api/health", (req, res) =>

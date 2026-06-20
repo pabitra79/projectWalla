@@ -56,5 +56,13 @@ export const ordersAPI = {
   getStats: () => API.get("/orders/admin/stats"),
   getAllStudents: () => API.get("/orders/admin/students"),
 };
+// Contact
+export const contactAPI = {
+  send: (data) => API.post("/contact", data),
+  getAll: () => API.get("/contact/admin/all"),
+  getOne: (id) => API.get(`/contact/admin/${id}`),
+  update: (id, data) => API.put(`/contact/admin/${id}`, data),
+  delete: (id) => API.delete(`/contact/admin/${id}`),
+};
 
 export default API;
