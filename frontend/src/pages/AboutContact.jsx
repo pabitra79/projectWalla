@@ -308,7 +308,7 @@ export function Contact() {
               </h3>
               <div className="space-y-4">
                 <a
-                  href="https://wa.me/918787565964"
+                  href="https://wa.me/916294343584"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-4 p-3 rounded-xl bg-emerald-500/5 hover:bg-emerald-500/10 transition-all duration-300 group"
@@ -320,7 +320,7 @@ export function Contact() {
                     <p className="font-medium text-white group-hover:text-emerald-400 transition-colors">
                       WhatsApp (Fastest)
                     </p>
-                    <p className="text-sm text-gray-400">+91 8787565964</p>
+                    <p className="text-sm text-gray-400">+91 6294343584</p>
                   </div>
                 </a>
                 <a
@@ -345,7 +345,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="font-medium text-white">Call Us</p>
-                    <p className="text-sm text-gray-400">+91 8787565964</p>
+                    <p className="text-sm text-gray-400">+91 6294343584</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-3 rounded-xl bg-gray-800/30">
@@ -370,7 +370,7 @@ export function Contact() {
                 Most students get a reply in under 10 minutes on WhatsApp!
               </p>
               <a
-                href="https://wa.me/918787565964?text=Hi! I need help with a college project."
+                href="https://wa.me/916294343584?text=Hi! I need help with a college project."
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-green-500 text-white font-semibold px-6 py-3 rounded-xl hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
