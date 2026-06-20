@@ -3,7 +3,7 @@
 
 import { MessageCircle } from "lucide-react";
 
-const WA_NUMBER = "918787565964"; // Replace with your number
+const WA_NUMBER = "916294343584"; // Replace with your number
 const WA_MESSAGE = encodeURIComponent(
   "Hi! I need help with a college project.",
 );

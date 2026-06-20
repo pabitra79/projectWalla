@@ -174,7 +174,7 @@ export default function Footer() {
                   <Phone className="w-4 h-4 text-indigo-400" />
                 </div>
                 <div>
-                  <span>+91 8787565964/6294343584</span>
+                  <span>+91 6294343584</span>
                   <br />
                   <span className="text-xs text-gray-600">
                     Mon-Sat, 9AM-8PM
