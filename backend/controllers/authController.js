@@ -113,7 +113,9 @@ exports.forgotPassword = async (req, res, next) => {
     console.log("💾 OTP Expires:", updatedUser.otpExpires);
 
     // Send OTP email
-    await sendOTPEmail(user.email, user.name, otp);
+    sendOTPEmail(user.email, user.name, otp).catch((err) =>
+      console.log("OTP email error (non-fatal):", err.message),
+    );
 
     res.json({
       success: true,

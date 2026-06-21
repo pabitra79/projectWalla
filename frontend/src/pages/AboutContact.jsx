@@ -241,24 +241,19 @@ export function Contact() {
     setSending(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await contactAPI.send(form);
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.data.success) {
         toast.success("✅ Message sent! We'll reply within 2 hours.");
         setForm({ name: "", email: "", phone: "", message: "" });
       } else {
-        toast.error(data.message || "Failed to send message.");
+        toast.error(response.data.message || "Failed to send message.");
       }
     } catch (error) {
-      toast.error("Network error. Please check your connection.");
+      toast.error(
+        error.response?.data?.message ||
+          "Network error. Please check your connection.",
+      );
       console.error("Contact form error:", error);
     } finally {
       setSending(false);
