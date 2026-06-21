@@ -1,18 +1,19 @@
 const nodemailer = require("nodemailer");
 
 // Fixed — force IPv4, add timeouts so it fails fast instead of hanging
+// ✅ Fixed — port 465 with SSL, more reliable on Render
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT) || 587,
-  secure: false,
+
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  family: 4, // ← force IPv4, fixes ENETUNREACH on Render
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
+  family: 4,
+  connectionTimeout: 15000,
+  greetingTimeout: 15000,
+  socketTimeout: 15000,
 });
 
 // Send OTP email
