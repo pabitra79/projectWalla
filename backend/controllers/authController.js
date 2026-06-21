@@ -1,6 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const { sendOTPEmail, sendWelcomeEmail } = require("../utils/email");
+const {
+  sendDeliveryEmail,
+  sendOrderConfirmationEmail,
+  sendContactEmail,
+  sendOTPEmail,
+  sendWelcomeEmail,
+} = require("../utils/email");
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();

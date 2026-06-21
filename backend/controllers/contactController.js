@@ -1,5 +1,5 @@
 const Contact = require("../models/Contact");
-const { sendContactEmail } = require("../utils/email");
+const { sendContactMessage, sendContactEmail } = require("../utils/email");
 
 // POST /api/contact
 exports.sendContactMessage = async (req, res, next) => {
