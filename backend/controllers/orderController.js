@@ -3,6 +3,8 @@ const Project = require("../models/Project");
 const {
   sendOrderConfirmationEmail,
   sendDeliveryEmail,
+  sendPaymentConfirmationEmail,
+  sendContactEmail,
 } = require("../utils/email");
 
 // POST /api/orders  (student places order)
@@ -345,6 +347,16 @@ exports.submitPayment = async (req, res, next) => {
       status = "paid";
     } else if (percentage > 0 && percentage < 100) {
       status = "partial";
+    }
+
+    // In submitPayment function
+    if (paymentStatus === "paid" || paymentStatus === "partial") {
+      sendPaymentConfirmationEmail(req.user.email, {
+        studentName: req.user.name,
+        projectName: order.projectName,
+        amount: paidAmount,
+        orderId: order._id.toString().slice(-8).toUpperCase(),
+      }).catch(() => {});
     }
 
     // Update payment details

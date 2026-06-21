@@ -203,6 +203,13 @@ export function Login() {
         </button>
       </form>
 
+      <Link
+        to="/forgot-password"
+        className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
+      >
+        Forgot Password?
+      </Link>
+
       <div className="mt-6 text-center">
         <p className="text-gray-400 text-sm">
           Don't have an account?{" "}

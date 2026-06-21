@@ -30,6 +30,13 @@ export const authAPI = {
   login: (data) => API.post("/auth/login", data),
   getMe: () => API.get("/auth/me"),
   updateProfile: (data) => API.put("/auth/update-profile", data),
+
+  // ✅ Forgot Password - New routes
+  forgotPassword: (email) => API.post("/auth/forgot-password", { email }),
+  verifyOTP: (email, otp) => API.post("/auth/verify-otp", { email, otp }),
+  resetPassword: (email, otp, newPassword) =>
+    API.post("/auth/reset-password", { email, otp, newPassword }),
+  resendOTP: (email) => API.post("/auth/resend-otp", { email }),
 };
 
 // Projects

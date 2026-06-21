@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import { Login, Register } from "./pages/Auth";
 import { About, Contact } from "./pages/AboutContact";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import ForgotPassword from "./pages/ForgotPassword";
 import { Link } from "lucide-react";
 
 function Layout({ children, noFooter, noWhatsApp }) {
@@ -86,7 +87,6 @@ export default function App() {
               </Layout>
             }
           />
-
           {/* Auth */}
           <Route
             path="/login"
@@ -104,7 +104,6 @@ export default function App() {
               </Layout>
             }
           />
-
           {/* Protected — Student */}
           <Route
             path="/order/:projectId"
@@ -146,7 +145,6 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-
           {/* Protected — Admin */}
           <Route
             path="/admin"
@@ -158,7 +156,15 @@ export default function App() {
               </AdminRoute>
             }
           />
-
+          // Add route
+          <Route
+            path="/forgot-password"
+            element={
+              <Layout noFooter noWhatsApp>
+                <ForgotPassword />
+              </Layout>
+            }
+          />
           {/* 404 */}
           <Route
             path="*"

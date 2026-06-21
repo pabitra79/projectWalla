@@ -97,8 +97,23 @@ const orderSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    // for forgot password
+    otp: {
+      type: String,
+      default: "",
+    },
+    otpExpires: {
+      type: Date,
+      default: null,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
+
+  // use
 );
 
 module.exports = mongoose.model("Order", orderSchema);

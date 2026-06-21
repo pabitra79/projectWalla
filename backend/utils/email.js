@@ -10,6 +10,102 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Send OTP email
+exports.sendOTPEmail = async (to, name, otp) => {
+  try {
+    const mailOptions = {
+      from: `"ProjectWalla" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+      to,
+      subject: "🔐 Password Reset OTP - ProjectWalla",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background: #0a0f0a; padding: 30px; border-radius: 12px; border: 1px solid #1a2d4d; color: #e2e8f0;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #6366f1;">🔐 Password Reset</h2>
+            <div style="width: 60px; height: 4px; background: linear-gradient(90deg, #6366f1, #8b5cf6); margin: 10px auto; border-radius: 4px;"></div>
+          </div>
+          
+          <p style="color: #e2e8f0;">Hi <strong>${name}</strong>,</p>
+          <p style="color: #e2e8f0;">We received a request to reset your password. Use the OTP below to verify your identity:</p>
+          
+          <div style="text-align: center; margin: 30px 0; padding: 20px; background: #1a2d1a; border-radius: 12px; border: 1px solid #34d399;">
+            <p style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #34d399; margin: 0;">
+              ${otp}
+            </p>
+          </div>
+          
+          <p style="color: #94a3b8; font-size: 14px;">
+            ⏳ This OTP is valid for <strong style="color: #e2e8f0;">10 minutes</strong>.
+          </p>
+          <p style="color: #64748b; font-size: 13px;">
+            If you didn't request this, please ignore this email.
+          </p>
+          
+          <hr style="border-color: #1a2d4d; margin: 20px 0;" />
+          <p style="color: #64748b; font-size: 12px; text-align: center;">
+            — Team ProjectWalla
+          </p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log(`📧 OTP email sent to ${to}`);
+    return true;
+  } catch (error) {
+    console.error("OTP email error:", error);
+    return false;
+  }
+};
+
+// Send welcome email after registration
+exports.sendWelcomeEmail = async (to, name) => {
+  try {
+    const mailOptions = {
+      from: `"ProjectWalla" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+      to,
+      subject: "🎉 Welcome to ProjectWalla!",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background: #0a0f0a; padding: 30px; border-radius: 12px; border: 1px solid #1a2d4d; color: #e2e8f0;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #6366f1;">🎉 Welcome to ProjectWalla!</h2>
+            <div style="width: 60px; height: 4px; background: linear-gradient(90deg, #6366f1, #8b5cf6); margin: 10px auto; border-radius: 4px;"></div>
+          </div>
+          
+          <p style="color: #e2e8f0;">Hi <strong>${name}</strong>,</p>
+          <p style="color: #e2e8f0;">Thank you for joining ProjectWalla! We're excited to help you with your college projects.</p>
+          
+          <div style="background: #1a2d1a; padding: 16px; border-radius: 8px; border-left: 4px solid #34d399; margin: 20px 0;">
+            <p style="color: #e2e8f0; margin: 0;">
+              🚀 <strong>What you can do now:</strong>
+            </p>
+            <ul style="color: #94a3b8; padding-left: 20px;">
+              <li>Browse our 12+ ready-made projects</li>
+              <li>Request a custom project</li>
+              <li>Track your orders in dashboard</li>
+            </ul>
+          </div>
+          
+          <a href="${process.env.FRONTEND_URL || "http://localhost:5173"}/projects" 
+             style="display: inline-block; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; margin: 10px 0;">
+            Browse Projects →
+          </a>
+          
+          <hr style="border-color: #1a2d4d; margin: 20px 0;" />
+          <p style="color: #64748b; font-size: 12px; text-align: center;">
+            — Team ProjectWalla
+          </p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log(`📧 Welcome email sent to ${to}`);
+    return true;
+  } catch (error) {
+    console.error("Welcome email error:", error);
+    return false;
+  }
+};
 exports.sendOrderConfirmationEmail = async (to, orderDetails) => {
   const { studentName, projectName, orderId, budget, deadline } = orderDetails;
 
@@ -139,4 +235,35 @@ exports.sendReplyEmail = async (to, data) => {
     console.error("Reply email error:", error);
     return false;
   }
+};
+exports.testEmailConnection = async () => {
+  try {
+    await transporter.verify();
+    console.log("✅ Email transporter is ready");
+    return true;
+  } catch (error) {
+    console.error("❌ Email connection failed:", error.message);
+    return false;
+  }
+};
+// Add these functions to your email.js
+
+// Send payment confirmation email
+exports.sendPaymentConfirmationEmail = async (to, details) => {
+  const { studentName, projectName, amount, orderId } = details;
+
+  await transporter.sendMail({
+    from: `"ProjectWalla" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+    to,
+    subject: `💰 Payment Received - ${projectName}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background: #0a0f0a; padding: 20px; border-radius: 12px; border: 1px solid #1a2d4d;">
+        <h2 style="color: #34d399;">💰 Payment Received!</h2>
+        <p style="color: #e2e8f0;">Hi <strong>${studentName}</strong>,</p>
+        <p style="color: #e2e8f0;">We have received your payment of <strong style="color: #34d399;">$${amount}</strong> for <strong>${projectName}</strong>.</p>
+        <p style="color: #e2e8f0;">We will start working on your project shortly.</p>
+        <p style="color:#64748b;">— Team ProjectWalla</p>
+      </div>
+    `,
+  });
 };

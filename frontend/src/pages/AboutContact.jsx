@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { contactAPI } from "../api";
 
 export function About() {
   const SKILLS = [
@@ -254,9 +255,7 @@ export function Contact() {
         toast.success("✅ Message sent! We'll reply within 2 hours.");
         setForm({ name: "", email: "", phone: "", message: "" });
       } else {
-        toast.error(
-          data.message || "Failed to send message. Please try again.",
-        );
+        toast.error(data.message || "Failed to send message.");
       }
     } catch (error) {
       toast.error("Network error. Please check your connection.");
