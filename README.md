@@ -70,7 +70,7 @@ EMAIL_USER=your_gmail@gmail.com
 EMAIL_PASS=your_gmail_app_password
 
 ADMIN_EMAIL=admin@projectwalla.com
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=******
 
 CLIENT_URL=http://localhost:5173
 ```
